@@ -2,7 +2,7 @@ package com.example.demoproject;
 
 public class File implements Component {
 
-    private String fileName;
+    private final String fileName;
 
     public File(String fileName) {
         this.fileName = fileName;
