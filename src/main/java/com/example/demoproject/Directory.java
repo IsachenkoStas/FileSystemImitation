@@ -33,7 +33,7 @@ public class Directory implements Component {
         for (int i = 0; i < depth; i++) {
             sb.append("  ");
         }
-        sb.append(dirName).append("/").append("\n");
+        sb.append(dirName).append("\n");
         for (Component component : children) {
             sb.append(component.print(depth + 1));
         }

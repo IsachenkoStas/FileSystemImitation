@@ -1,38 +1,13 @@
 package com.example.demoproject;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.Scanner;
+public class FileManager {
 
-@SpringBootApplication
-public class DemoProjectApplication {
+    protected static final List<Component> ROOTS = new ArrayList<>();
 
-    public static void main(String[] args) {
-        SpringApplication.run(DemoProjectApplication.class, args);
-
-        Directory root = new Directory("");
-        FileManager.ROOTS.add(root);
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Start or exit: ");
-        String input = scanner.nextLine();
-        while (!input.equals("exit")) {
-            System.out.println("Enter a file system path or 'print':");
-            input = scanner.nextLine();
-            if (input.equals("print")) {
-                FileManager.printFileSystem();
-            } else {
-                try {
-                    FileManager.addPath(input);
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Invalid path format. Please try again.");
-                }
-            }
-        }
-    }
-
-    /*private static void addPath(String path) {
+    public static void addPath(String path) {
         String[] components = path.split("/");
         if (components.length == 1) {
             System.out.println("Wrong input");
@@ -65,7 +40,7 @@ public class DemoProjectApplication {
         }
     }
 
-    private static Directory findOrCreateDirectory(Directory parent, String name) {
+    public static Directory findOrCreateDirectory(Directory parent, String name) {
         for (Component component : parent.getChildren()) {
             if (component instanceof Directory directory && directory.getDirName().equals(name)) {
                 return directory;
@@ -76,23 +51,23 @@ public class DemoProjectApplication {
         return newDir;
     }
 
-    private static Directory findOrCreateRoot(String name) {
-        for (Component component : roots) {
+    public static Directory findOrCreateRoot(String name) {
+        for (Component component : ROOTS) {
             if (component instanceof Directory directory && directory.getDirName().equals(name)) {
                 return directory;
             }
         }
         Directory newRoot = new Directory(name);
-        roots.add(newRoot);
+        ROOTS.add(newRoot);
         return newRoot;
     }
 
 
-    private static void printFileSystem() {
+    public static void printFileSystem() {
         StringBuilder sb = new StringBuilder();
-        for (Component root : roots) {
+        for (Component root : ROOTS) {
             sb.append(root.print(0));
         }
         System.out.println(sb);
-    }*/
+    }
 }
